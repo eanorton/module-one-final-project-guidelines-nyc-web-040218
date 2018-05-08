@@ -1,8 +1,13 @@
 # $run_program = true
 
+valid_commands = ["movies", "movie", "books", "book", "shows", "show", "authors", "author", "games", "game"]
 
 def no_rec_error_msg
-  puts "I'm sorry - it looks like there are no recommendations in that category! Please try again or fuck off breh\n\n**************\n\n"
+  puts "I'm sorry, it looks like there are no recommendations in that category! Please try again!\n\n**************\n\n"
+end
+
+def invalid_input
+  puts "I'm sorry, that is not a valid command! Please try again! \n\n**************\n\n"
 end
 
 def welcome
@@ -79,6 +84,10 @@ def what_type?(h)
         puts value
       end
     end
+
+    # if valid_commands.!include?(down_response)
+    #   invalid_input
+
   end
 end
 # def display_results_by_type_to_user(organized_hash)
