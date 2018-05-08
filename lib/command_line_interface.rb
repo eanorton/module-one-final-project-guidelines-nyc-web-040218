@@ -1,10 +1,8 @@
 # $run_program = true
 
 
-def error_msg
-
-  puts "Command not recognized!"
-  puts "for more info"
+def no_rec_error_msg
+  puts "I'm sorry - it looks like there are no recommendations in that category! Please try again or fuck off breh\n\n**************\n\n"
 end
 
 def welcome
@@ -16,64 +14,70 @@ def get_interest_from_user
   interest = gets.chomp
 end
 
-def what_type?
-  puts "What type of recommendations would you like to see? You can display: movies, music, books, authors, shows, games, or all recommendations! You can also exit at any time by typing EXIT."
-  # while $run_program == true
-    puts "**************"
+def what_type?(h)
+  loop do
+    puts "What type of recommendations would you like to see? You can display: movies, music, books, authors, shows, games, or all recommendations! You can also exit at any time by typing EXIT."
+    puts "\n**************"
     puts "\nEnter category:"
     response = gets.chomp
     down_response = response.downcase
+
     if down_response == "exit"
       puts
-      # $run_program = false
       bye = ["Byeeeeee", "Bye Felicia", "See ya!", "auf Wiedersehen!"]
       puts bye.sample
       break
 
-    # elsif down_response == "movie" && h["movie"] == nil
-    #     puts "Sorry! We don't seem to have any movie recommendations!"
-    #     what_type?
-    # elsif down_response == "movie"
-      h = return_hash_of_recommendation_titles(unorganized_hash)
-        puts h["movie"]
-      end
+    elsif down_response == "movies"
+      if h["movie"] == nil
+        puts
+        no_rec_error_msg
+      else
+      puts h["movie"]
+    end
+  end
 
-    # elsif down_response == "book" && h["book"] == nil
-    #     puts "Sorry! We don't seem to have any movie recommendations!"
-    #     what_type?
-    # elsif
-    #     puts h["book"]
-    #   end
-    #
-    # elsif down_response == "author" && h["author"] == nil
-    #     puts "Sorry! We don't seem to have any author recommendations!"
-    #     what_type?
-    # elsif
-    #     puts h["author"]
-    #   end
-    #
-    # elsif down_response == "shows" && h["show"] == nil
-    #     puts "Sorry! We don't seem to have any show recommendations!"
-    #     what_type?
-    # elsif
-    #     puts h["show"]
-    #   end
-    #
-    # elsif down_response == "game" && h["game"] == nil
-    #     puts "Sorry! We don't seem to have any game recommendations!"
-    #     what_type?
-    # elsif
-    #     puts h["game"]
-    #   end
-    #
+    if down_response == "books"
+      if h["book"] == nil
+        puts
+        no_rec_error_msg
+      else
+        puts h["book"]
+      end
+    end
+
+    if down_response == "author"
+      if h["author"] == nil
+        puts
+        no_rec_error_msg
+      else
+        puts h["author"]
+      end
+    end
+
+    if down_response == "shows"
+      if h["show"] == nil
+        puts
+        no_rec_error_msg
+      else
+        puts h["show"]
+      end
+    end
+
+    if down_response == "games"
+      if h["game"] == nil
+        puts
+        no_rec_error_msg
+      else
+        puts h["game"]
+      end
+    end 
+
     # elsif down_response == "all"
-    #   puts h
-    # else
-    # "Hmm... I'm not recognizing that. Try again"
-    # what_type?
+    #   "Hmm... I'm not recognizing that. Try again"
+    #   what_type?
   end
 end
-
 # def display_results_by_type_to_user(organized_hash)
 #   "Based on your search, we recommend the following:"
 # end

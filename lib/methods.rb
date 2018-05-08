@@ -18,8 +18,8 @@ def return_hash_of_recommendation_titles(unorganized_hash)
 #   h
   h = {}
   unorganized_hash["Similar"]["Results"].each do |hash|
-    h[unorganized_hash["Type"]] ||= []
-    h[unorganized_hash["Type"]] << unorganized_hash["Name"]
+    h[hash["Type"]] ||= []
+    h[hash["Type"]] << hash["Name"]
   end
   h
 end

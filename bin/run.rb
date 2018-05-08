@@ -8,7 +8,7 @@ require 'pry'
 input = get_interest_from_user
 url_formatted_input = user_input(input)
 unorganized_hash = link_with_user_input(url_formatted_input)
-return_hash_of_recommendation_titles(unorganized_hash)
-what_type?
+h = return_hash_of_recommendation_titles(unorganized_hash)
+what_type?(h)
 
 #display_results_by_type_to_user(organized_hash)
