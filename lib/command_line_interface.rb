@@ -28,7 +28,7 @@ def what_type?(h)
       puts bye.sample
       break
 
-    elsif down_response == "movies"
+    elsif down_response == "movies" || down_response == "movie"
       if h["movie"] == nil
         puts
         no_rec_error_msg
@@ -37,7 +37,7 @@ def what_type?(h)
     end
   end
 
-    if down_response == "books"
+    if down_response == "books" || down_response == "book"
       if h["book"] == nil
         puts
         no_rec_error_msg
@@ -46,7 +46,7 @@ def what_type?(h)
       end
     end
 
-    if down_response == "author"
+    if down_response == "authors" || down_response == "author"
       if h["author"] == nil
         puts
         no_rec_error_msg
@@ -55,7 +55,7 @@ def what_type?(h)
       end
     end
 
-    if down_response == "shows"
+    if down_response == "shows" || down_response == "show"
       if h["show"] == nil
         puts
         no_rec_error_msg
@@ -64,18 +64,21 @@ def what_type?(h)
       end
     end
 
-    if down_response == "games"
+    if down_response == "games" || down_response == "game"
       if h["game"] == nil
         puts
         no_rec_error_msg
       else
         puts h["game"]
       end
-    end 
+    end
 
-    # elsif down_response == "all"
-    #   "Hmm... I'm not recognizing that. Try again"
-    #   what_type?
+    if down_response == "all"
+      h.each do |key,value|
+        puts key.upcase
+        puts value
+      end
+    end
   end
 end
 # def display_results_by_type_to_user(organized_hash)
