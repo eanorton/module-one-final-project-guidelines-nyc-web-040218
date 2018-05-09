@@ -59,7 +59,7 @@ def what_type?(h)
             loop do
               puts "If you would like more information about any title, just type in the respective number!"
               content_interest_num = gets.chomp
-              if content_interest_num.class != Fixnum
+              if content_interest_num.to_i == 0
                 puts "Please enter a number!".red
                 break
               end
@@ -71,6 +71,7 @@ def what_type?(h)
               puts "\n\n"
               synopsis = h.values[0][num].values.flatten.to_s
               puts synopsis.blue
+              break 
             end
           end
         end
