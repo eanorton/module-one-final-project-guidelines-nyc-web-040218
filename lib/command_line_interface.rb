@@ -71,7 +71,7 @@ def what_type?(h)
               puts "\n\n"
               synopsis = h.values[0][num].values.flatten.to_s
               puts synopsis.blue
-              break 
+              break
             end
           end
         end
@@ -89,6 +89,23 @@ def what_type?(h)
             array << hash.keys
           end
           array.flatten.each.with_index(1){|element, i| puts "#{i}. #{element}"}
+          loop do
+            puts "If you would like more information about any title, just type in the respective number!"
+            content_interest_num = gets.chomp
+            if content_interest_num.to_i == 0
+              puts "Please enter a number!".red
+              break
+            end
+            num = (content_interest_num.to_i - 1)
+            if num > h.values[0].length || num < 0
+              invalid_input
+              break
+            end
+            puts "\n\n"
+            synopsis = h.values[0][num].values.flatten.to_s
+            puts synopsis.blue
+            break
+          end
         end
       end
     end
@@ -105,6 +122,23 @@ def what_type?(h)
               array << hash.keys
             end
             array.flatten.each.with_index(1){|element, i| puts "#{i}. #{element}"}
+            loop do
+              puts "If you would like more information about any title, just type in the respective number!"
+              content_interest_num = gets.chomp
+              if content_interest_num.to_i == 0
+                puts "Please enter a number!".red
+                break
+              end
+              num = (content_interest_num.to_i - 1)
+              if num > h.values[0].length || num < 0
+                invalid_input
+                break
+              end
+              puts "\n\n"
+              synopsis = h.values[0][num].values.flatten.to_s
+              puts synopsis.blue
+              break
+            end
           end
         end
       end
@@ -121,6 +155,23 @@ def what_type?(h)
               array << hash.keys
             end
             array.flatten.each.with_index(1){|element, i| puts "#{i}. #{element}"}
+            loop do
+              puts "If you would like more information about any title, just type in the respective number!"
+              content_interest_num = gets.chomp
+              if content_interest_num.to_i == 0
+                puts "Please enter a number!".red
+                break
+              end
+              num = (content_interest_num.to_i - 1)
+              if num > h.values[0].length || num < 0
+                invalid_input
+                break
+              end
+              puts "\n\n"
+              synopsis = h.values[0][num].values.flatten.to_s
+              puts synopsis.blue
+              break
+            end
           end
         end
       end
@@ -137,6 +188,23 @@ def what_type?(h)
               array << hash.keys
             end
             array.flatten.each.with_index(1){|element, i| puts "#{i}. #{element}"}
+            loop do
+              puts "If you would like more information about any title, just type in the respective number!"
+              content_interest_num = gets.chomp
+              if content_interest_num.to_i == 0
+                puts "Please enter a number!".red
+                break
+              end
+              num = (content_interest_num.to_i - 1)
+              if num > h.values[0].length || num < 0
+                invalid_input
+                break
+              end
+              puts "\n\n"
+              synopsis = h.values[0][num].values.flatten.to_s
+              puts synopsis.blue
+              break
+            end
           end
         end
       end
@@ -153,6 +221,23 @@ def what_type?(h)
               array << hash.keys
             end
             array.flatten.each.with_index(1){|element, i| puts "#{i}. #{element}"}
+            loop do
+              puts "If you would like more information about any title, just type in the respective number!"
+              content_interest_num = gets.chomp
+              if content_interest_num.to_i == 0
+                puts "Please enter a number!".red
+                break
+              end
+              num = (content_interest_num.to_i - 1)
+              if num > h.values[0].length || num < 0
+                invalid_input
+                break
+              end
+              puts "\n\n"
+              synopsis = h.values[0][num].values.flatten.to_s
+              puts synopsis.blue
+              break
+            end
           end
         end
       end
