@@ -25,7 +25,7 @@ def what_type?(h)
     $i = 0
     puts "\nWhat type of recommendations would you like to see?\n\nYou can display all the titles by categories: <Movies>, <Music>, <Books>, <Authors>, <Shows>, <Games>, or <All>!\n\nYou can display more information for each title by typing in the corresponding number once you've selected a category.\n\nIf you would like to start a new search, simply type <New>.\n\nTo exit program, type <Exit>"
     puts "\n**************".green
-    puts "\nEnter category or select title:\n"
+    puts "\nEnter category:\n"
     response = gets.chomp
     down_response = response.downcase
     puts "\n"
@@ -53,7 +53,25 @@ def what_type?(h)
             value.select do |hash|
               array << hash.keys
             end
-            array.flatten.each.with_index(1){|element, i| puts "#{i}. #{element}"}
+            array.flatten.each.with_index(1) do
+              |element, i| puts "#{i}. #{element}"
+            end
+            loop do
+              puts "If you would like more information about any title, just type in the respective number!"
+              content_interest_num = gets.chomp
+              if content_interest_num.class != Fixnum
+                puts "Please enter a number!".red
+                break
+              end
+              num = (content_interest_num.to_i - 1)
+              if num > h.values[0].length || num < 0
+                invalid_input
+                break
+              end
+              puts "\n\n"
+              synopsis = h.values[0][num].values.flatten.to_s
+              puts synopsis.blue
+            end
           end
         end
       end
