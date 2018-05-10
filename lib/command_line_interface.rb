@@ -1,45 +1,63 @@
 require 'colorize'
 require 'artii'
+require 'terminal-table'
 
 valid_commands = ["movies", "movie", "books", "book", "shows", "show", "authors", "author", "games", "game"]
 
 def no_rec_error_msg
-  puts "I'm sorry, it looks like there are no recommendations in that category! Please try a different one!\n\n**************\n\n".red
+  puts "I'm sorry, it looks like there are no recommendations in that category! Please try a different one!\n\n****************************\n\n".red.blink
 end
 
 def invalid_input
-  puts "I'm sorry, that is not a valid command! Please try again! \n\n**************\n\n"
+  puts "I'm sorry, that is not a valid command! Please try again! \n\n****************************\n\n".red.blink
+end
+
+def invalid_number
+  puts "Oops! Invalid input! Please choose a number that correlates to a title!"
+end
+
+def make_table(title, array)
+  rows = []
+  array.flatten.each.with_index(1) do |element, i|
+  rows << [i, element]
+  end
+  table = Terminal::Table.new :title => title.colorize(:color => :light_green, :background => :light_white), :headings => ["#", "NAME"], :rows => rows, :style => {:all_separators => true}
+  puts "\n"
+  puts table
 end
 
 def welcome
-  puts "Welcome to the Recommendation Machine! You can see a list of recommendations based off of Movies, Music, Books, Authors, TV Shows, or Games!"
+  puts "\nWelcome to the Recommendation Machine! You can see a list of recommendations based off of Movies, Music, Books, Authors, TV Shows, or Games!".green.bold
 end
 
 def get_interest_from_user
-  puts "\nWhat are you interested in?\n"
+  puts "\nWhat would you like to see recommendations based off of?\n".green
   interest = gets.chomp
 end
 
 def what_type?(h)
   loop do
     $i = 0
-    puts "\nWhat type of recommendations would you like to see?\n\nYou can display all the titles by categories: <Movies>, <Music>, <Books>, <Authors>, <Shows>, <Games>, or <All>!\n\nYou can display more information for each title by typing in the corresponding number once you've selected a category.\n\nIf you would like to start a new search, simply type <New>.\n\nTo exit program, type <Exit>"
-    puts "\n**************".green
-    puts "\nEnter category:\n"
+    puts "\n*Nice choice there bud!\n".cyan.italic
+    puts "You can display recommendedations by categories: <Movies>, <Music>, <Books>, <Authors>, <Shows>, <Games>, or <All>!\n".green.bold
+    puts "You can also display more information for each title by typing in the corresponding number once you've selected a category\n".cyan
+    puts "--If you would like to start a new search, just type <New>.\n".green
+    puts "--To exit program, type <Exit>.".red.bold
+    puts "\n****************************".light_green
+    puts "\nEnter category:\n".green.bold
     response = gets.chomp
     down_response = response.downcase
     puts "\n"
 
     if h == {}
-      puts "Sorry, there doesn't seem to be anything there. Please try a new search.".green
+      puts "Sorry, there doesn't seem to be anything there. Please try a new search.".red
       $i += 1
       break
     end
 
     if down_response == "exit"
-      bye = ["Byeeeeeeeeee", "Bye Felicia", "See ya!", "auf Wiedersehen!", "Tschüß", "Ciao!", "Bon voyage", "Wadaeaan"]
-      puts bye.sample
-      puts "\n"
+      bye = ["Byeeeeeeeeee\n", "Bye Felicia\n", "See ya!\n", "auf Wiedersehen!\n", "Tschüß\n", "Ciao!\n", "Bon voyage\n", "Wadaeaan\n"]
+      puts bye.sample.magenta.bold
       break
 
     elsif down_response == "movies" || down_response == "movie" #|| down_response is in the list of movies
@@ -53,24 +71,26 @@ def what_type?(h)
             value.select do |hash|
               array << hash.keys
             end
-            array.flatten.each.with_index(1) do
-              |element, i| puts "#{i}. #{element}"
-            end
+            make_table(key.upcase, array)
             loop do
-              puts "If you would like more information about any title, just type in the respective number!"
-              content_interest_num = gets.chomp
-              if content_interest_num.to_i == 0
-                puts "Please enter a number!".red
+              puts "\n\nIf you would like more information about any title, just type in the respective number!".light_green
+              puts "\nIf you would like to view a different cateogory, just enter which you would like to display:".light_green
+              puts "\nIf you would like to go back to view all categories, enter <Back>.\n".bold
+              content_interest_num = gets.chomp.downcase
+              if content_interest_num == "back"
                 break
               end
-              num = (content_interest_num.to_i - 1)
-              if num > h.values[0].length || num < 0
-                invalid_input
+              if content_interest_num != "new" && content_interest_num.to_i == 0 #check to see if input is string
+                puts "\nPlease enter a number!".red.blink
+              end
+              num = (content_interest_num.to_i - 1) #turn user input to integer, and adjust for array index 0
+              if (num + 1) > h["movie"].length || num < 0
+                invalid_number
                 break
               end
               puts "\n\n"
-              synopsis = h.values[0][num].values.flatten.to_s
-              puts synopsis.blue
+              synopsis = h["movie"][num].values
+              puts synopsis.flatten
               break
             end
           end
@@ -88,22 +108,26 @@ def what_type?(h)
           value.select do |hash|
             array << hash.keys
           end
-          array.flatten.each.with_index(1){|element, i| puts "#{i}. #{element}"}
+          make_table(key.upcase, array)
           loop do
-            puts "If you would like more information about any title, just type in the respective number!"
+            puts "\n\nIf you would like more information about any title, just type in the respective number!".light_green
+            puts "\nIf you would like to view a different cateogory, just enter which you would like to display:".light_green
             content_interest_num = gets.chomp
+            if content_interest_num == "back"
+              break
+            end
             if content_interest_num.to_i == 0
-              puts "Please enter a number!".red
+              puts "\nPlease enter a number!".red.blink
               break
             end
             num = (content_interest_num.to_i - 1)
-            if num > h.values[0].length || num < 0
-              invalid_input
+            if (num + 1) > h["book"].length || num < 0
+              invalid_number
               break
             end
             puts "\n\n"
-            synopsis = h.values[0][num].values.flatten.to_s
-            puts synopsis.blue
+            synopsis = h["book"][num].values
+            puts synopsis.flatten
             break
           end
         end
@@ -121,22 +145,26 @@ def what_type?(h)
             value.select do |hash|
               array << hash.keys
             end
-            array.flatten.each.with_index(1){|element, i| puts "#{i}. #{element}"}
+            make_table(key.upcase, array)
             loop do
-              puts "If you would like more information about any title, just type in the respective number!"
+              puts "\n\nIf you would like more information about any title, just type in the respective number!".light_green
+              puts "\nIf you would like to view a different cateogory, just enter which you would like to display:".light_green
               content_interest_num = gets.chomp
+              if content_interest_num == "back"
+                break
+              end
               if content_interest_num.to_i == 0
-                puts "Please enter a number!".red
+                puts "\nPlease enter a number!".red.blink
                 break
               end
               num = (content_interest_num.to_i - 1)
-              if num > h.values[0].length || num < 0
-                invalid_input
+              if (num + 1) > h["author"].length || num < 0
+                invalid_number
                 break
               end
               puts "\n\n"
-              synopsis = h.values[0][num].values.flatten.to_s
-              puts synopsis.blue
+              synopsis = h["author"][num].values
+              puts synopsis.flatten
               break
             end
           end
@@ -154,22 +182,26 @@ def what_type?(h)
             value.select do |hash|
               array << hash.keys
             end
-            array.flatten.each.with_index(1){|element, i| puts "#{i}. #{element}"}
+            make_table(key.upcase, array)
             loop do
-              puts "If you would like more information about any title, just type in the respective number!"
+              puts "\n\nIf you would like more information about any title, just type in the respective number!".light_green
+              puts "\nIf you would like to view a different cateogory, just enter which you would like to display:".light_green
               content_interest_num = gets.chomp
+              if content_interest_num == "back"
+                break
+              end
               if content_interest_num.to_i == 0
-                puts "Please enter a number!".red
+                puts "\nPlease enter a number!".red.blink
                 break
               end
               num = (content_interest_num.to_i - 1)
-              if num > h.values[0].length || num < 0
-                invalid_input
+              if (num + 1) > h["music"].length || num < 0
+                invalid_number
                 break
               end
               puts "\n\n"
-              synopsis = h.values[0][num].values.flatten.to_s
-              puts synopsis.blue
+              synopsis = h["music"][num].values
+              puts synopsis.flatten
               break
             end
           end
@@ -187,22 +219,26 @@ def what_type?(h)
             value.select do |hash|
               array << hash.keys
             end
-            array.flatten.each.with_index(1){|element, i| puts "#{i}. #{element}"}
+            make_table(key.upcase, array)
             loop do
-              puts "If you would like more information about any title, just type in the respective number!"
+              puts "\n\nIf you would like more information about any title, just type in the respective number!".light_green
+              puts "\nIf you would like to view a different cateogory, just enter which you would like to display:".light_green
               content_interest_num = gets.chomp
+              if content_interest_num == "back"
+                break
+              end
               if content_interest_num.to_i == 0
-                puts "Please enter a number!".red
+                puts "\nPlease enter a number!".red.blink
                 break
               end
               num = (content_interest_num.to_i - 1)
-              if num > h.values[0].length || num < 0
-                invalid_input
+              if (num + 1) > h["show"].length || num < 0
+                invalid_number
                 break
               end
               puts "\n\n"
-              synopsis = h.values[0][num].values.flatten.to_s
-              puts synopsis.blue
+              synopsis = h["show"][num].values
+              puts synopsis.flatten
               break
             end
           end
@@ -220,22 +256,26 @@ def what_type?(h)
             value.select do |hash|
               array << hash.keys
             end
-            array.flatten.each.with_index(1){|element, i| puts "#{i}. #{element}"}
+            make_table(key.upcase, array)
             loop do
-              puts "If you would like more information about any title, just type in the respective number!"
+              puts "\n\nIf you would like more information about any title, just type in the respective number!".light_green
+              puts "\nIf you would like to view a different cateogory, just enter which you would like to display:".light_green
               content_interest_num = gets.chomp
+              if content_interest_num == "back"
+                break
+              end
               if content_interest_num.to_i == 0
-                puts "Please enter a number!".red
+                puts "\nPlease enter a number!".red.blink
                 break
               end
               num = (content_interest_num.to_i - 1)
-              if num > h.values[0].length || num < 0
-                invalid_input
+              if (num + 1) > h["game"].length || num < 0
+                invalid_number
                 break
               end
               puts "\n\n"
-              synopsis = h.values[0][num].values.flatten.to_s
-              puts synopsis.blue
+              synopsis = h["game"][num].values
+              puts synopsis.flatten
               break
             end
           end
@@ -244,18 +284,16 @@ def what_type?(h)
 
     elsif down_response == "all"
       h.each do |key,value|
-        puts key.upcase.colorize(:color => :green, :background => :blue)
         array = []
         value.select do |hash|
           array << hash.keys
         end
-        array.flatten.each.with_index(1){|element, i| puts "#{i}. #{element}"}
+      make_table(key.upcase, array)
       end
 
     elsif down_response == "new"
       $i += 1
       break
-
 
     else
       invalid_input
