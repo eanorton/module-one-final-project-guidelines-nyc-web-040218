@@ -19,7 +19,7 @@ end
 def make_table(title, array)
   rows = []
   array.flatten.each.with_index(1) do |element, i|
-  rows << [i, element]
+    rows << [i, element]
   end
   table = Terminal::Table.new :title => title.colorize(:color => :light_green, :background => :light_white), :headings => ["#", "NAME"], :rows => rows, :style => {:all_separators => true}
   puts "\n"
@@ -91,6 +91,13 @@ def what_type?(h)
               puts "\n\n"
               synopsis = h["movie"][num].values
               puts synopsis.flatten
+              puts "\nWould you like to save this title to your user list? Please type <Yes> or <No>."
+              # save_response = gets.chomp.downcase
+              # if save_response == "yes" || "no"
+              #   if save_response == "yes"
+              #     save
+              #   end
+              # end
               break
             end
           end
