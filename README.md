@@ -1,49 +1,7 @@
-# Module One Final Project Guidelines
+The Recommendation Machine is a simple command line project that Ryan G and I developed for our Module One final project at the Flatiron school in 2018. The RM accesses Movie, Shows, Music, Books, Authors, and Game recommendations and content via the Tastedive API and associates each recommendation and search query with a user. We built an OO model and active record database to select for recommendations and users.
 
-Congratulations, you're at the end of module one! You've worked crazy hard to get here and have learned a ton.
+This app can be forked on GitHub and cloned to a local machine. To be able to pull from the API, simply create an account with Tastedive and insert your API key into the link in the API communicator file. Once you are ready to run, simply execute the ruby bin/run.rb file.
 
-For your final project, we'll be building a Command Line database application.
+We would value any contributions in areas of user interface, automatically saving queries / adding selected recommendations to lists, and performing more analytical operations on the dataset.
 
-## Project Requirements
-
-### Option One - Data Analytics Project
-
-1. Access a Sqlite3 Database using ActiveRecord.
-2. You should have at minimum three models including one join model. This means you must have a many-to-many relationship.
-3. You should seed your database using data that you collect either from a CSV, a website by scraping, or an API.
-4. Your models should have methods that answer interesting questions about the data. For example, if you've collected info about movie reviews, what is the most popular movie? What movie has the most reviews?
-5. You should provide a CLI to display the return values of your interesting methods.  
-6. Use good OO design patterns. You should have separate classes for your models and CLI interface.
-
-### Option Two - Command Line CRUD App
-
-1. Access a Sqlite3 Database using ActiveRecord.
-2. You should have a minimum of three models.
-3. You should build out a CLI to give your user full CRUD ability for at least one of your resources. For example, build out a command line To-Do list. A user should be able to create a new to-do, see all todos, update a todo item, and delete a todo. Todos can be grouped into categories, so that a to-do has many categories and categories have many to-dos.
-4. Use good OO design patterns. You should have separate models for your runner and CLI interface.
-
-### Brainstorming and Proposing a Project Idea
-
-Projects need to be approved prior to launching into them, so take some time to brainstorm project options that will fulfill the requirements above.  You must have a minimum of four [user stories](https://en.wikipedia.org/wiki/User_story) to help explain how a user will interact with your app.  A user story should follow the general structure of `"As a <role>, I want <goal/desire> so that <benefit>"`. In example, if we were creating an app to randomly choose nearby restaurants on Yelp, we might write:
-
-* As a user, I want to be able to enter my name to retrieve my records
-* As a user, I want to enter a location and be given a random nearby restaurant suggestion
-* As a user, I should be able to reject a suggestion and not see that restaurant suggestion again
-* As a user, I want to be able to save to and retrieve a list of favorite restaurant suggestions
-
-## Instructions
-
-1. Fork and clone this repository.
-2. Build your application. Make sure to commit early and commit often. Commit messages should be meaningful (clearly describe what you're doing in the commit) and accurate (there should be nothing in the commit that doesn't match the description in the commit message). Good rule of thumb is to commit every 3-7 mins of actual coding time. Most of your commits should have under 15 lines of code and a 2 line commit is perfectly acceptable.
-3. Make sure to create a good README.md with a short description, install instructions, a contributors guide and a link to the license for your code.
-4. Make sure your project checks off each of the above requirements.
-5. Prepare a video demo (narration helps!) describing how a user would interact with your working project.
-    * The video should:
-      - Have an overview of your project.(2 minutes max)
-6. Prepare a presentation to follow your video.(3 minutes max)
-    * Your presentation should:
-      - Describe something you struggled to build, and show us how you ultimately implemented it in your code.
-      - Discuss 3 things you learned in the process of working on this project.
-      - Address, if anything, what you would change or add to what you have today?
-      - Present any code you would like to highlight.   
-7. *OPTIONAL, BUT RECOMMENDED*: Write a blog post about the project and process.
+Shoutout to Jon Mines for helping establish our models and schema. 

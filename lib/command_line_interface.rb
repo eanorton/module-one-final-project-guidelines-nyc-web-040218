@@ -26,6 +26,12 @@ def make_table(title, array)
   puts table
 end
 
+def title
+  title = Artii::Base.new :font => 'slant'
+  puts ""
+  puts title.asciify('THE RECOMMENDATION MACHINE').magenta
+end
+
 def welcome
   puts "\nWelcome to the Recommendation Machine! You can see a list of recommendations based off of Movies, Music, Books, Authors, TV Shows, or Games!".green.bold
 end
@@ -56,7 +62,7 @@ def what_type?(h)
     end
 
     if down_response == "exit"
-      bye = ["Byeeeeeeeeee\n", "Bye Felicia\n", "See ya!\n", "auf Wiedersehen!\n", "Tschüß\n", "Ciao!\n", "Bon voyage\n", "Wadaeaan\n"]
+      bye = ["Byeeeeeeeeee\n", "Bye Felicia\n", "See ya!\n", "auf Wiedersehen!\n", "Tschüß\n", "Ciao!\n", "Bon voyage\n",]
       puts bye.sample.magenta.bold
       break
 

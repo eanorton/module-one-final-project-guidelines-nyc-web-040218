@@ -15,7 +15,7 @@ def return_hash_of_recommendation_titles(unorganized_hash)
 end
 
 def create_user
-  puts "\nHey wanna check this out? What's your name?\n"
+  puts "\nWhat's your name?\n"
   name = gets.chomp.downcase
   user_instance = User.find_or_create_by(name: name)
   puts "\nHi, #{user_instance.name.capitalize}, your id is #{user_instance.id}!".blue.bold

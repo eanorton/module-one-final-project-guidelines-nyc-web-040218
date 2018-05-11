@@ -5,6 +5,7 @@ require_relative "../lib/methods.rb"
 
 require 'pry'
 
+title
 welcome
 user_id = create_user
 input = get_interest_from_user
